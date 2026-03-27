@@ -1,8 +1,20 @@
+## Habilitar execução de scripts customizados do VMware Tools
+
+Permite que a VM execute scripts de customização durante o deploy ou clonagem  
+(**Guest OS Customization**).
+
+---
+
+## Runbook — comandos completos
+
+> ✅ Use este bloco quando precisar copiar e colar tudo de uma vez
+
+<details>
+<summary><strong>➡️ Clique aqui para expandir e copiar todos os comandos</strong></summary>
+
+```bash
 ################################################################################
 # Habilitar execução de scripts customizados do VMware Tools
-#
-# Permite que a VM execute scripts de customização durante o deploy ou clonagem
-# (Guest OS Customization)
 ################################################################################
 
 # Verifica configuração atual
@@ -16,12 +28,10 @@ vmware-toolbox-cmd config set deployPkg enable-custom-scripts true
 # Identificação de dispositivos de storage (Linux)
 ################################################################################
 
-# Lista detalhes do dispositivo para identificar origem
-# (vendor, modelo, serial, WWN)
+# Lista detalhes do dispositivo (vendor, modelo, serial, WWN)
 lsblk -o NAME,SIZE,TYPE,FSTYPE,MODEL,SERIAL,WWN,VENDOR
 
 # Mostra informações completas do device via udev
-# (bus, path, FC, WWN)
 udevadm info --query=all --name=/dev/sdb
 
 
@@ -29,40 +39,33 @@ udevadm info --query=all --name=/dev/sdb
 # LVM — Remoção e recriação de Logical Volumes (RHEL 9)
 ################################################################################
 
-# Exibe todas as informações do Logical Volume lun03
-# Usado para confirmar tamanho, status e detalhes antes de qualquer alteração
+# Inspeciona o Logical Volume lun03
 lvdisplay /dev/vg_stg/lun03
 
-# Desativa o Logical Volume lun03
-# Garante que o volume não esteja em uso antes da remoção
+# Desativa o Logical Volume
 lvchange -an /dev/vg_stg/lun03
 
-# Confirma que o LV lun03 está desativado (NOT available)
+# Confirma status
 lvdisplay /dev/vg_stg/lun03
 
-# Remove definitivamente o Logical Volume lun03
-# ATENÇÃO: esta ação é irreversível
+# Remove o Logical Volume (AÇÃO IRREVERSÍVEL)
 lvremove -y /dev/vg_stg/lun03
 
-# Valida que o Logical Volume lun03 não existe mais
+# Valida remoção
 lvdisplay /dev/vg_stg/lun03
 
-# Mostra o Volume Group vg_stg e o espaço livre após a remoção do LV
+# Verifica espaço livre no VG
 vgs vg_stg
 
-# Lista os Logical Volumes existentes no Volume Group vg_stg
+# Lista LVs existentes
 lvs vg_stg
 
-# Cria o Logical Volume lun03 com 5 TB
+# Cria novos Logical Volumes
 lvcreate -L 5T -n lun03 vg_stg
-
-# Cria o Logical Volume lun04 com 5 TB
 lvcreate -L 5T -n lun04 vg_stg
 
-# Lista os LVs com detalhes
-# (VG, nome, tamanho, path e atributos)
+# Lista LVs com detalhes completos
 lvs -o vg_name,lv_name,lv_size,lv_path,lv_attr vg_stg
 
-# Mostra os device links criados em /dev/vg_stg/
-# Confirma o mapeamento para os device-mapper (dm-*)
+# Confirma device-mapper
 ls -l /dev/vg_stg/
