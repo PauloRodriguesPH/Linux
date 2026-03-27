@@ -1,13 +1,6 @@
-## Habilitar execução de scripts customizados do VMware Tools
-
-Permite que a VM execute scripts de customização durante o deploy ou clonagem  
-(**Guest OS Customization**).
-
----
-
 ## Runbook — comandos completos
 
-> ✅ Use este bloco quando precisar copiar e colar tudo de uma vez
+> ✅ Isto não é um script, copie e adapte os comando conforme a necessidade
 
 <details>
 <summary><strong>➡️ Clique aqui para expandir e copiar todos os comandos</strong></summary>
