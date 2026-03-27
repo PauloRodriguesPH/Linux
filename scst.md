@@ -1,4 +1,4 @@
-## Exemplo de configuração do SCST (Single Copy Target)
+## Exemplo de configuração do SCST (Generic SCSI Target Subsystem for Linux)
 
 Este arquivo representa **a configuração do framework SCST**, responsável por expor
 Logical Units (LUNs) a iniciadores Fibre Channel via driver QLogic (`qla2x00t`).
