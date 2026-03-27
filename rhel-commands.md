@@ -3,7 +3,7 @@
 > ✅ Isto não é um script, copie e adapte os comando conforme a necessidade
 
 <details>
-<summary><strong>➡️ Clique aqui para expandir e copiar todos os comandos</strong></summary>
+<summary><strong>➡️ Clique aqui para expandir todos os comandos</strong></summary>
 
 ```bash
 ################################################################################
